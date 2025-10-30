@@ -27,6 +27,10 @@ in {
     ];
 
     hashedPassword = "$y$j9T$zpBx1gFC6rnIaO0h1Z/.2.$WLT53HkIDSKTxQrbcr1Af135OPz/q3oCC1ee2TVkvf0";
+
+    openssh.authorizedKeys.keys = [
+      (builtins.readFile ./rs-server.pub)
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -36,9 +40,9 @@ in {
 
   services.openssh = {
     enable = true;
-    authorizedKeysFiles = [
-      "${dir}/rs-server.pub"
-    ];
+    #authorizedKeysFiles = [
+    #  "${dir}/rs-server.pub"
+    #];
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
