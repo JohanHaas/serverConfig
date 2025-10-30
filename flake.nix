@@ -3,11 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
+    disko,
+    ...
   }: let
     system = "x86_64-linux";
 
@@ -23,6 +30,12 @@
         inherit system;
         modules = [
           ./hosts/netcup
+
+          disko.nixosModules.disko
+          ./disko/disko-config.nix
+          {
+            disko.devices.main.device = nixpkgs.lib.mkForce "/dev/vda";
+          }
         ];
       };
     };

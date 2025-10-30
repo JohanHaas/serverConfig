@@ -19,7 +19,8 @@ in {
       ];
     };
 
-    vpnUser = {
+    wireguard = {
+      #wireguard user
       isNormalUser = true;
       extraGroups = [];
       packages = with pkgs; [
