@@ -3,7 +3,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  dir = builtins.dirOf __curPos.file;
+in {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -35,7 +37,7 @@
   services.openssh = {
     enable = true;
     authorizedKeysFiles = [
-      "./rs-server.pub"
+      "dir/hosts/netcup/rs-server.pub"
     ];
     settings = {
       PasswordAuthentication = false;
