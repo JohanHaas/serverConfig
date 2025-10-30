@@ -37,7 +37,7 @@ in {
   services.openssh = {
     enable = true;
     authorizedKeysFiles = [
-      "dir/hosts/netcup/rs-server.pub"
+      "${dir}/hosts/netcup/rs-server.pub"
     ];
     settings = {
       PasswordAuthentication = false;
