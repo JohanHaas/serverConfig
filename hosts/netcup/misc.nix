@@ -11,6 +11,7 @@
   environment.systemPackages = with pkgs; [
     vim
     git
+    tree
   ];
 
   system.stateVersion = "25.05";

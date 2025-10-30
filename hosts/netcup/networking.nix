@@ -5,9 +5,13 @@
 }: {
   networking.hostName = "nix-netcup";
 
-  networking.firewall.allowedTCPPorts = [];
-  networking.firewall.allowedUDPPorts = [];
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [22];
+    allowedUDPPorts = [];
+    checkReversePath = true;
+    trustedInterfaces = ["lo"];
+  };
 
   services.fail2ban.enable = true;
 }

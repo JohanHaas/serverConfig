@@ -22,7 +22,6 @@
       "netcup" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./hosts/common
           ./hosts/netcup
         ];
       };

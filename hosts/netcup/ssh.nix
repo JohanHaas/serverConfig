@@ -9,11 +9,7 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
-      AllowUsers = ["nixer"];
+      AllowUsers = ["nixer" "vpnUser"];
     };
   };
-
-  users.users."nixer".openssh.authorizedKeys.keys = [
-    (builtins.readFile ./assets/rs-server.pub)
-  ];
 }
