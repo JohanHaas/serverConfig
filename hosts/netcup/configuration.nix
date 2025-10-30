@@ -15,8 +15,6 @@
 
   time.timeZone = "Europe/Amsterdam";
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
   services.xserver.xkb.layout = "de";
 
   users.users.nixer = {
@@ -46,6 +44,8 @@
       AllowUsers = ["nixer"];
     };
   };
+
+  nix.settings.trusted-users = ["nixer"];
 
   networking.firewall.allowedTCPPorts = [];
   networking.firewall.allowedUDPPorts = [];

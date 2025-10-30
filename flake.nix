@@ -19,7 +19,7 @@
     };
   in {
     nixosConfigurations = {
-      "netcup" = {
+      "netcup" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./hosts/common
