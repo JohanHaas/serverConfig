@@ -9,7 +9,7 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
-      AllowUsers = ["nixer" "vpnUser"];
+      AllowUsers = ["nixer" "wireguard"];
     };
   };
 }

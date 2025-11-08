@@ -41,18 +41,6 @@
                     mountOptions = ["compress=zstd"];
                   };
 
-                  "/home/wireguard" = {
-                    mountOptions = ["compress=zstd"];
-                  };
-
-                  "/home/bob" = {
-                    mountOptions = ["compress=zstd"];
-                  };
-
-                  "/home/charlie" = {
-                    mountOptions = ["compress=zstd"];
-                  };
-
                   "/snapshots" = {};
 
                   "/swap" = {
