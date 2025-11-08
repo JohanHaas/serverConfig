@@ -33,9 +33,6 @@
 
           disko.nixosModules.disko
           ./disko/disko-config.nix
-          {
-            disko.devices.main.device = nixpkgs.lib.mkForce "/dev/vda";
-          }
         ];
       };
     };
