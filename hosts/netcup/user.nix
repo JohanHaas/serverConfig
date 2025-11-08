@@ -13,7 +13,7 @@ in {
       packages = with pkgs; [
       ];
 
-      hashedPassword = "$y$j9T$/UVVk2FuAwBY3YQRO/enq/$AOQhuzSHNjz/MEB.fQX/fiFuKM.iDyYlLfFilQq4/FD";
+      hashedPassword = "$y$j9T$3lyK/pr/JEFh2HB4MKdC.0$0Z23UuBlGKTn3ZQt8zorOssfhvt3Dyz.D5mEaGhiNJ8";
       openssh.authorizedKeys.keys = [
         (builtins.readFile ./assets/ssh-keys/rootUser.pub)
       ];
