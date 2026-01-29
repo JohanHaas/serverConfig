@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -11,12 +10,20 @@
     htop
   ];
 
-
+  boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 0;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nix-vps";
-  networking.networkmanager.enable = true;
-  networking.useDHCP = pkgs.lib.mkDefault true;
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
+  networking.hostName = "nix-home-server";
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "de_DE.UTF-8";
@@ -37,12 +44,6 @@
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "admin" ];
     auto-optimise-store = true;
-  };
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
   };
 
   zramSwap.enable = true;

@@ -32,7 +32,16 @@
           ./hosts/hetzner
 
           disko.nixosModules.disko
-          ./disko/disko-config.nix
+          ./disko/hetzner-config.nix
+        ];
+      };
+      "home" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/home
+
+          disko.nixosModules.disko
+          ./disko/home-config.nix
         ];
       };
     };
