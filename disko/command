@@ -1,1 +1,2 @@
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ./disko-config.nix
+nix run github:numtide/nixos-anywhere -- --flake .#nix-tests nixos@192.168.178.158 --extra-files ~/.ssh/id_ed25519_github

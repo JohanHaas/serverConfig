@@ -3,22 +3,13 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/vda";
+        device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
-            ESP = {
-              priority = 1;
-              name = "ESP";
-              start = "1M";
-              end = "512M";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = ["umask=0077"];
-              };
+            boot = {
+              size = "1M";
+              type = "EF02"; 
             };
             root = {
               size = "100%";
@@ -30,23 +21,15 @@
                     mountpoint = "/";
                     mountOptions = ["compress=zstd" "noatime"];
                   };
-
                   "/nix" = {
                     mountpoint = "/nix";
-                    mountOptions = ["noatime"];
+                    mountOptions = ["compress=zstd" "noatime"];
                   };
-
                   "/home" = {
                     mountpoint = "/home";
                     mountOptions = ["compress=zstd"];
                   };
-
                   "/snapshots" = {};
-
-                  "/swap" = {
-                    mountpoint = "/.swap";
-                    swap.swapfile.size = "16G";
-                  };
                 };
               };
             };

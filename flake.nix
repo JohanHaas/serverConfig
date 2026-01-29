@@ -26,10 +26,10 @@
     };
   in {
     nixosConfigurations = {
-      "netcup" = nixpkgs.lib.nixosSystem {
+      "hetzner" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./hosts/netcup
+          ./hosts/hetzner
 
           disko.nixosModules.disko
           ./disko/disko-config.nix
