@@ -11,8 +11,6 @@
       PermitRootLogin = "no";
       AllowUsers = [ "admin" ];
     };
-    openFirewall = false;
+    openFirewall = true;
   };
-
-
 }
