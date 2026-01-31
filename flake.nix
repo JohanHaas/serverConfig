@@ -37,8 +37,12 @@
       };
       "home" = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = {
+          inherit inputs;
+        };
         modules = [
           ./hosts/home
+          
 
           disko.nixosModules.disko
           ./disko/home-config.nix

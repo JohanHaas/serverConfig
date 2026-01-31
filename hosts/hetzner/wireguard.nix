@@ -20,10 +20,10 @@
     privateKeyFile = "/var/lib/wireguard/privatekey";
 
     peers = [
-      #{ #homeserver
-      #  publicKey = "PUBLIC_KEY_VON_ZUHAUSE";
-      #  allowedIPs = [ "10.100.0.2/32" ];
-      #}
+      { #homeserver
+        publicKey = "eTHjEb3pPDvUXsSBW3Guz8kVGfW5mqqfII8UFCdDiC4=";
+        allowedIPs = [ "10.100.0.2/32" ];
+      }
       { #laptop
         publicKey = "o3Tl8dBH124bvBrhciExeAgIedM0wLuqsDKWCRA9IW0=";
         allowedIPs = [ "10.100.0.3/32" ];

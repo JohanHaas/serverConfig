@@ -47,6 +47,53 @@
           };
         };
       };
+
+      one = {
+        type = "disk";
+        device = "/dev/sda";
+        content = {
+          type = "gpt";
+          partitions.mdadm = {
+            size = "100%";
+            content = {
+              type = "mdraid";
+              name = "raid1";
+            };
+          };
+        };
+      };
+
+      two = {
+        type = "disk";
+        device = "/dev/sdb";
+        content = {
+          type = "gpt";
+          partitions.mdadm = {
+            size = "100%";
+            content = {
+              type = "mdraid";
+              name = "raid1";
+            };
+          };
+        };
+      };
+    };
+    mdadm.raid1 = {
+      type = "mdadm";
+      level = 1;
+      metadata = "1.2";
+      content = {
+        type = "gpt";
+        partitions.primary = {
+          size = "100%";
+          content = {
+            type = "filesystem";
+            format = "btrfs";
+            mountpoint = "/storage";
+            mountOptions = ["compress=zstd" "noatime"];
+          };
+        };
+      };
     };
   };
 }

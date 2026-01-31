@@ -8,11 +8,15 @@
     neovim
     git
     htop
+    nbfc-linux
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 0;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.kernelModules = [ "coretemp" "nct6775" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   virtualisation.containers.enable = true;
   virtualisation = {
