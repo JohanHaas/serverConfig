@@ -52,5 +52,9 @@
 
   zramSwap.enable = true;
 
+  boot.swraid.mdadmConf = ''
+    MAILADDR Johanhaas99@gmail.com
+  '';
+
   system.stateVersion = "25.05";
 }
