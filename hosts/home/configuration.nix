@@ -18,14 +18,6 @@
   boot.kernelModules = [ "coretemp" "nct6775" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  virtualisation.containers.enable = true;
-  virtualisation = {
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
 
   networking.hostName = "nix-home-server";
 

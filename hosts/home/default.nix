@@ -7,5 +7,6 @@
     ./firewall.nix
     ./silence.nix
     ./nfs.nix
+    ./nixcontainers.nix
   ];
 }

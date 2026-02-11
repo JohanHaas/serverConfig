@@ -11,6 +11,11 @@
 
   services.fail2ban = {
     enable = true;
+    ignoreIP = [
+      "127.0.0.1/8"
+      "192.168.178.0/24" 
+      "10.100.0.0/24"    
+    ];
     maxretry = 3;
     bantime = "24h";
     bantime-increment = {
