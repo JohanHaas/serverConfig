@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "NixOS configs for nix-vps (Hetzner) and nix-home-server";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -10,39 +10,25 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    disko,
-    ...
-  }: let
+  # Attribute names match networking.hostName, so `nixos-rebuild switch
+  # --flake .` picks the right host by itself on each machine.
+  outputs = { nixpkgs, disko, ... }: let
     system = "x86_64-linux";
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [
-      ];
-    };
   in {
     nixosConfigurations = {
-      "hetzner" = nixpkgs.lib.nixosSystem {
+      "nix-vps" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./hosts/hetzner
+          ./hosts/gateway
 
           disko.nixosModules.disko
           ./disko/hetzner-config.nix
         ];
       };
-      "home" = nixpkgs.lib.nixosSystem {
+      "nix-home-server" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {
-          inherit inputs;
-        };
         modules = [
-          ./hosts/home
-          
+          ./hosts/homelab
 
           disko.nixosModules.disko
           ./disko/home-config.nix

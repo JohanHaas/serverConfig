@@ -1,14 +1,5 @@
+{ ... }:
 {
-  config,
-  pkgs,
-  ...
-}:
-{
-  
-  networking.firewall = {
-    enable = true;
-  };
-
   services.fail2ban = {
     enable = true;
     maxretry = 3;
@@ -16,8 +7,8 @@
     bantime-increment = {
       enable = true;
       formula = "ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)";
-      maxtime = "168h"; 
-      overalljails = true; 
+      maxtime = "168h";
+      overalljails = true;
     };
 
     jails = {
@@ -27,6 +18,5 @@
         mode = "aggressive";
       };
     };
-
   };
 }
