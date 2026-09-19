@@ -2,38 +2,34 @@
   description = "NixOS configs for nix-vps (Hetzner) and nix-home-server";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
 
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  # Attribute names match networking.hostName, so `nixos-rebuild switch
-  # --flake .` picks the right host by itself on each machine.
-  outputs = { nixpkgs, disko, ... }: let
-    system = "x86_64-linux";
+  outputs = { nixpkgs, disko, sops-nix, ... }: let
+    # `host` ist der Name in nixosConfigurations, nicht networking.hostName.
+    mkHost = host: diskoConfig: nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit sops-nix host; };
+      modules = [
+        ./hosts/${host}
+        disko.nixosModules.disko
+        diskoConfig
+      ];
+    };
   in {
     nixosConfigurations = {
-      "nix-vps" = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/gateway
-
-          disko.nixosModules.disko
-          ./disko/hetzner-config.nix
-        ];
-      };
-      "nix-home-server" = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/homelab
-
-          disko.nixosModules.disko
-          ./disko/home-config.nix
-        ];
-      };
+      gateway = mkHost "gateway" ./disko/hetzner-config.nix;
+      homelab = mkHost "homelab" ./disko/home-config.nix;
     };
   };
 }

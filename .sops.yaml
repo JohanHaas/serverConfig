@@ -1,0 +1,26 @@
+keys:
+  - &primary age1xlt5rv4qlexmwd26g4ukx7r0lcyrad7cegyyqqagxkwl6k5r23fs5p26x6
+  # Aus /etc/ssh/ssh_host_ed25519_key.pub der Server (ssh-keyscan | ssh-to-age)
+  - &gateway age1730tg4yxmlr6ahtmc9h7pp3gl2uv76fn9sz33j4h4mka9z3qhg2qf6cucw
+  - &homelab age1srg0w4gf3j22j04l6l85e0qzve7xyhtj67wvr48eqfn7283zjpdsafx8gy
+creation_rules:
+  - path_regex: secrets/gateway\.yaml$
+    key_groups:
+    - age:
+      - *primary
+      - *gateway
+  - path_regex: secrets/homelab\.yaml$
+    key_groups:
+    - age:
+      - *primary
+      - *homelab
+  - path_regex: secrets/common\.yaml$
+    key_groups:
+    - age:
+      - *primary
+      - *gateway
+      - *homelab
+  - path_regex: secrets/secrets\.yaml$
+    key_groups:
+    - age:
+      - *primary

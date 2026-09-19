@@ -7,5 +7,9 @@
     ./fail2ban.nix
     ./firewall.nix
     ./tailscale.nix
+    ./github-runner.nix
+    ./sops.nix
+    ./alerting.nix
+    ./mail.nix
   ];
 }
