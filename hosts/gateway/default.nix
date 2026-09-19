@@ -9,5 +9,6 @@
     ./networking.nix
     ./docker.nix
     ./github-runner.nix
+    ./vaultwarden.nix
   ];
 }

@@ -12,4 +12,10 @@
     address = "fe80::1";
     interface = "enp1s0";
   };
+
+  # Sonst maskiert Tailscale Verkehr vom Tailnet an Docker-Container auf die
+  # Bridge-IP, und Caddys remote_ip-Filter (Tailnet-only) sperrt alle aus. Ob
+  # das greift, haengt nur davon ab, ob ts-forward vor den Docker-Regeln
+  # landet. Der Gateway routet keine Subnetze, braucht das SNAT also nicht.
+  services.tailscale.extraSetFlags = [ "--snat-subnet-routes=false" ];
 }
